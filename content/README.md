@@ -29,13 +29,23 @@ seriesOrder: 1
 
 ## 站点地址
 
-项目根目录的 `site.config.json` 包含 `siteUrl`。尚未配置真实域名时保持为空；配置真实 HTTP/HTTPS 地址后，构建器才会为静态文章生成 canonical 和 `og:url`。
+项目根目录的 `site.config.json` 包含 `siteUrl`。尚未配置正式域名时保持为空；配置真实 HTTP/HTTPS 地址后，构建器才会为已发布内容生成 canonical、`og:url` 和 sitemap。
 
 ```json
 {
   "siteUrl": ""
 }
 ```
+
+未来正式域名确定后，使用正式主域名配置，例如：
+
+```json
+{
+  "siteUrl": "https://example.com"
+}
+```
+
+`siteUrl` 末尾不要添加 `/`，它应代表正式主域名本身。如果网站使用根域名作为主地址，就填写根域名；`www` 是否跳转到根域名由 DNS 或托管平台配置，项目不会擅自假设或处理该跳转。`siteUrl` 为空时不会生成 canonical、`og:url` 或 sitemap；填写有效的 HTTP/HTTPS 地址后，才会生成带正式域名的内容页面元信息、robots sitemap 地址和 sitemap 文件。
 
 `cover` 为空时不会生成 `og:image`。如需使用本地封面，将图片放在 `content/` 内并在 front matter 中填写相对 Markdown 文件的路径；构建器会复制该图片并生成对应的分享元数据。
 
@@ -53,10 +63,11 @@ seriesOrder: 1
 
 ```bash
 npm run build
+npm run check
 npm start
 ```
 
-`npm start` 使用 Node.js 内置服务器预览 `outputs/`，默认地址为 `http://127.0.0.1:4173`。
+`npm run build` 会先清理并重新生成 `outputs/`。发布时执行构建后，将整个 `outputs/` 作为静态托管发布目录；不需要上传 `site/`、`content/` 或 `node_modules/`。`npm run check` 用于检查生成页面、内容状态、资源引用和站点地址规则。`npm start` 使用 Node.js 内置服务器预览 `outputs/`，默认地址为 `http://127.0.0.1:4173`，仅用于本地测试。
 
 从可访问的微信公众号链接导入一篇内容时，可以使用：
 
