@@ -258,6 +258,23 @@ async function writeRobots(siteUrl) {
   await writeFile(robotsOutput, `User-agent: *\nAllow: /${sitemapLine}\n`, 'utf8');
 }
 
+async function writeSitePageMetadata(siteUrl) {
+  if (!siteUrl) return;
+  const pages = [
+    ['index.html', `${siteUrl}/`],
+    ['articles.html', `${siteUrl}/articles.html`],
+    ['notes.html', `${siteUrl}/notes.html`],
+    ['before-shanghai.html', `${siteUrl}/before-shanghai.html`]
+  ];
+  for (const [relativePath, pageUrl] of pages) {
+    const filePath = path.join(outputRoot, relativePath);
+    const html = await readFile(filePath, 'utf8');
+    const metadata = `  <link rel="canonical" href="${escapeHtml(pageUrl)}" />\n  <meta property="og:url" content="${escapeHtml(pageUrl)}" />\n`;
+    if (!html.includes('</head>')) throw new Error(`${filePath}: missing closing head tag`);
+    await writeFile(filePath, html.replace('</head>', `${metadata}</head>`), 'utf8');
+  }
+}
+
 async function writeSitemap(siteUrl, publicItems) {
   if (!siteUrl) return false;
   const staticPages = [
@@ -425,6 +442,7 @@ async function getMarkdownFiles() {
 const { siteUrl } = await readSiteConfig();
 await prepareOutput();
 await writeRobots(siteUrl);
+await writeSitePageMetadata(siteUrl);
 const files = await getMarkdownFiles();
 const allItems = [];
 const slugs = new Set();

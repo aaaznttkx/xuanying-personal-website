@@ -195,6 +195,16 @@ async function checkSiteRules(siteUrl, htmlFiles) {
     fail('sitemap.xml is missing while siteUrl is configured');
     return;
   }
+  const pageUrls = [
+    ['index.html', `${siteUrl}/`],
+    ['articles.html', `${siteUrl}/articles.html`],
+    ['notes.html', `${siteUrl}/notes.html`],
+    ['before-shanghai.html', `${siteUrl}/before-shanghai.html`]
+  ];
+  for (const [relativePath, pageUrl] of pageUrls) {
+    const page = await readFile(path.join(outputRoot, relativePath), 'utf8');
+    if (!page.includes(`href="${pageUrl}"`) || !page.includes(`content="${pageUrl}"`)) fail(`${relativePath}: configured siteUrl metadata is incorrect`);
+  }
   const sitemap = await readFile(sitemapFile, 'utf8');
   if (!sitemap.includes('<urlset')) fail('sitemap.xml has invalid structure');
   for (const loc of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) if (!loc[1].startsWith(`${siteUrl}/`) && loc[1] !== siteUrl) fail(`sitemap contains an incorrect URL: ${loc[1]}`);
