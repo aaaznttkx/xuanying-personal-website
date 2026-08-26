@@ -1,0 +1,10 @@
+{
+  "name": "xuan-ying-growth-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-content.mjs",
+    "start": "node scripts/serve.mjs",
+    "import:wechat": "node scripts/import-wechat.mjs"
+  }
+}

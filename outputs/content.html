@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#F6F8F1" />
+  <title>内容｜玄英</title>
+  <style>
+    :root {
+      --paper: #F6F8F1;
+      --ink: #17251D;
+      --green: #3D8B68;
+      --green-deep: #246044;
+      --green-pale: #DDEBDD;
+      --muted: #718078;
+      --line: #D7E2D7;
+      --serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --article-width: 720px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    ::selection { color: var(--paper); background: var(--green-deep); }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 48px), 1120px); margin: 0 auto; }
+    .site-header { border-bottom: 1px solid var(--line); background: var(--paper); }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 76px; }
+    .brand { display: inline-flex; min-width: 0; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--green-deep); border-radius: 50%; color: var(--green-deep); }
+    .brand-mark svg { width: 29px; height: 29px; }
+    .brand-copy { white-space: nowrap; }
+    .brand-copy span { color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: .13em; }
+    .back-link { flex: 0 0 auto; color: var(--green-deep); font-size: 13px; font-weight: 700; }
+    .back-link:hover, .back-link:focus-visible { color: var(--green); }
+
+    .article-header { padding: 105px 0 78px; border-bottom: 1px solid var(--line); }
+    .article-header-inner, .article-body { width: calc(100% - 48px); max-width: var(--article-width); margin-right: auto; margin-left: auto; }
+    .article-kicker { margin: 0 0 20px; color: var(--green-deep); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .article-title { max-width: 100%; margin: 0 0 27px; overflow-wrap: break-word; word-break: normal; font-family: var(--serif); font-size: clamp(43px, 7vw, 76px); font-weight: 400; letter-spacing: -.045em; line-height: 1.08; }
+    .article-meta { display: flex; flex-wrap: wrap; gap: 9px 20px; color: var(--muted); font-size: 11px; }
+    .article-meta span + span { position: relative; }
+    .article-meta span + span::before { position: absolute; top: 50%; left: -12px; width: 3px; height: 3px; border-radius: 50%; background: var(--green); content: ""; transform: translateY(-50%); }
+    .article-tags { margin-top: 11px; color: var(--green); font-size: 11px; line-height: 1.6; }
+    .article-lede { margin: 0; padding: 29px 0 31px; border-bottom: 1px solid var(--line); color: #4D5F54; font-size: 17px; line-height: 1.95; }
+    .article-gallery { display: grid; gap: 24px; margin: 0 0 62px; }
+    .article-gallery-item { display: block; width: 100%; line-height: 0; }
+    .article-gallery-item img { display: block; width: 100%; max-width: 100%; height: auto; }
+    .article-gallery-item:hover img { opacity: .9; }
+    .article-markdown { margin: 0 0 62px; color: #34473C; font-size: 17px; line-height: 1.95; }
+    .article-markdown p { margin: 0 0 28px; }
+    .article-markdown h2, .article-markdown h3, .article-markdown h4 { margin: 52px 0 18px; color: var(--ink); font-family: var(--serif); font-weight: 400; line-height: 1.25; }
+    .article-markdown h2 { font-size: 34px; }
+    .article-markdown h3 { font-size: 27px; }
+    .article-markdown h4 { font-size: 22px; }
+    .article-markdown blockquote { margin: 30px 0; padding-left: 20px; border-left: 2px solid var(--green); color: var(--muted); }
+    .article-markdown ul, .article-markdown ol { margin: 0 0 28px; padding-left: 24px; }
+    .article-markdown a:not(.article-markdown-image) { color: var(--green-deep); text-decoration: underline; text-decoration-color: var(--green-pale); text-underline-offset: 3px; }
+    .article-markdown-image { display: block; width: 100%; margin: 24px 0; line-height: 0; }
+    .article-markdown-image img { display: block; width: 100%; max-width: 100%; height: auto; }
+    .source-link { display: inline-flex; margin-top: 18px; color: var(--green-deep); font-size: 12px; font-weight: 800; }
+    .source-link:hover { color: var(--green); }
+    .source-button { align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border: 1px solid var(--green-deep); border-radius: 2px; }
+    .source-button:hover, .source-button:focus-visible { color: var(--paper); background: var(--green-deep); }
+
+    .article-body { padding: 56px 0 108px; }
+    .article-source { padding-top: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .article-source p { margin: 0; }
+    .not-found { padding: 100px 0; text-align: center; }
+    .not-found h1 { margin: 0 0 17px; font-family: var(--serif); font-size: 48px; font-weight: 400; }
+    .not-found p { color: var(--muted); }
+
+    @media (max-width: 650px) {
+      .container, .article-header-inner, .article-body { width: calc(100% - 32px); max-width: var(--article-width); }
+      .nav-wrap { min-height: 68px; }
+      .brand { gap: 9px; font-size: 13px; }
+      .brand-mark { width: 34px; height: 34px; }
+      .brand-mark svg { width: 26px; height: 26px; }
+      .brand-copy span { display: none; }
+      .back-link { font-size: 11px; }
+      .article-header { padding: 68px 0 51px; }
+      .article-title { font-size: clamp(38px, 11.5vw, 56px); letter-spacing: -.035em; line-height: 1.12; }
+      .article-lede { padding: 24px 0 28px; font-size: 15px; }
+      .article-body { padding: 42px 0 78px; }
+      .article-gallery { gap: 18px; margin-bottom: 50px; }
+      .article-markdown { margin-bottom: 50px; font-size: 16px; }
+      .article-markdown h2 { font-size: 30px; }
+      .article-markdown h3 { font-size: 25px; }
+      .article-markdown-image { margin: 18px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="返回玄英首页">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="1"/><rect x="14" y="14" width="20" height="20" stroke="currentColor" stroke-width="1" transform="rotate(45 24 24)"/><path d="M9 24H39M24 9V39" stroke="currentColor" stroke-width="1" opacity=".55"/></svg></span>
+        <span class="brand-copy">玄英 <span>/ XUAN YING</span></span>
+      </a>
+      <a class="back-link" id="back-link" href="articles.html">← 返回文章列表</a>
+    </div>
+  </header>
+
+  <main id="detail-root"></main>
+
+  <script src="content/content-data.js"></script>
+  <script>
+    const root = document.querySelector('#detail-root');
+    const backLink = document.querySelector('#back-link');
+    const slug = new URLSearchParams(window.location.search).get('slug');
+    const item = window.siteContent.find((entry) => entry.slug === slug);
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
+    }
+
+    function safeUrl(value) {
+      const url = String(value ?? '');
+      return /^(?:https?:\/\/|public\/|\/)/i.test(url) ? url : '';
+    }
+
+    function safeExternalUrl(value) {
+      const raw = String(value ?? '').trim();
+      if (!/^https?:\/\//i.test(raw)) return '';
+      try {
+        const url = new URL(raw);
+        return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
+      } catch {
+        return '';
+      }
+    }
+
+    function renderInline(value) {
+      let result = escapeHtml(value);
+      result = result.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      result = result.replace(/`([^`]+)`/g, '<code>$1</code>');
+      result = result.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/gi, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+      return result;
+    }
+
+    function renderMarkdown(markdown, content) {
+      const lines = String(markdown ?? '').split(/\r?\n/);
+      const blocks = [];
+      let paragraph = [];
+
+      function flushParagraph() {
+        if (paragraph.length === 0) return;
+        blocks.push(`<p>${paragraph.map((line) => renderInline(line)).join('<br>')}</p>`);
+        paragraph = [];
+      }
+
+      lines.forEach((line) => {
+        const trimmed = line.trim();
+        if (!trimmed) {
+          flushParagraph();
+          return;
+        }
+        const imageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+        if (imageMatch) {
+          flushParagraph();
+          const src = safeUrl(imageMatch[2]);
+          if (!src) return;
+          blocks.push(`<a class="article-markdown-image" href="${escapeHtml(src)}" target="_blank" rel="noopener noreferrer" aria-label="查看第 ${blocks.filter((block) => block.includes('article-markdown-image')).length + 1} 张原图"><img src="${escapeHtml(src)}" alt="${escapeHtml(imageMatch[1] || content.title)}" loading="lazy" decoding="async"></a>`);
+          return;
+        }
+        const headingMatch = trimmed.match(/^(#{2,4})\s+(.+)$/);
+        if (headingMatch) {
+          flushParagraph();
+          const tag = `h${headingMatch[1].length}`;
+          blocks.push(`<${tag}>${renderInline(headingMatch[2])}</${tag}>`);
+          return;
+        }
+        if (/^>\s?/.test(trimmed)) {
+          flushParagraph();
+          blocks.push(`<blockquote>${renderInline(trimmed.replace(/^>\s?/, ''))}</blockquote>`);
+          return;
+        }
+        paragraph.push(trimmed.replace(/^[-*]\s+/, '• '));
+      });
+      flushParagraph();
+      return blocks.join('');
+    }
+
+    function renderGallery(content) {
+      if (!Array.isArray(content.gallery) || content.gallery.length === 0) return '';
+      const images = content.gallery.map((src, index) => `
+        <a class="article-gallery-item" href="${escapeHtml(src)}" target="_blank" rel="noopener noreferrer" aria-label="查看第 ${index + 1} 张原图">
+          <img src="${escapeHtml(src)}" alt="${escapeHtml(content.title)}｜第 ${index + 1} 张图片" loading="lazy" decoding="async">
+        </a>
+      `).join('');
+      return `<section class="article-gallery" aria-label="${escapeHtml(content.title)}连续贴图">${images}</section>`;
+    }
+
+    if (item?.type === 'article') {
+      window.location.replace(`articles/${encodeURIComponent(item.slug)}/index.html`);
+    } else if (item?.type === 'note') {
+      window.location.replace(`notes/${encodeURIComponent(item.slug)}/index.html`);
+    } else if (!item) {
+      root.innerHTML = '<section class="not-found"><h1>没有找到这条记录。</h1><p><a class="source-link" href="index.html">返回首页</a></p></section>';
+    } else {
+      const isArticle = item.type === 'article';
+      backLink.href = isArticle ? 'articles.html' : 'notes.html';
+      backLink.textContent = isArticle ? '← 返回文章列表' : '← 返回手记列表';
+      const sourceUrl = isArticle ? safeExternalUrl(item.sourceUrl) : '';
+      const source = sourceUrl ? `<a class="source-link source-button" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">查看公众号原文 ↗</a>` : '';
+      const sourceFooter = isArticle
+        ? sourceUrl
+          ? `<p>本文整理自微信公众号「玄英札记」。<br>如需查看完整原文，请访问<a class="source-link" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">微信公众号原文 ↗</a>。</p>`
+          : '<p>本文整理自微信公众号「玄英札记」。</p>'
+        : '';
+      const articleContent = item.bodyMarkdown ? `<div class="article-markdown">${renderMarkdown(item.bodyMarkdown, item)}</div>` : renderGallery(item);
+      document.title = `${item.title}｜玄英`;
+      root.innerHTML = `
+        <header class="article-header">
+          <div class="article-header-inner">
+            <p class="article-kicker">${escapeHtml(item.category)}</p>
+            <h1 class="article-title">${escapeHtml(item.title)}</h1>
+            <div class="article-meta"><span>${escapeHtml(item.date || '—')}</span><span>${escapeHtml(item.category)}</span></div>
+            <p class="article-tags">${item.tags.map((tag) => escapeHtml(tag)).join(' / ')}</p>
+            <p class="article-lede">${escapeHtml(item.summary)}</p>
+            ${source}
+          </div>
+        </header>
+        <article class="article-body">
+          ${articleContent}
+          ${sourceFooter ? `<div class="article-source">${sourceFooter}</div>` : ''}
+        </article>
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#F6F8F1" />
+  <meta name="description" content="去上海之前 Before Shanghai｜玄英出发前写下的记录。" />
+  <title>去上海之前 / Before Shanghai｜玄英</title>
+  <style>
+    :root {
+      --paper: #F6F8F1;
+      --paper-deep: #EEF3EA;
+      --ink: #17251D;
+      --green: #3D8B68;
+      --green-deep: #246044;
+      --green-pale: #DDEBDD;
+      --muted: #718078;
+      --line: #D7E2D7;
+      --serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --max-width: 960px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    ::selection { color: var(--paper); background: var(--green-deep); }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 48px), var(--max-width)); margin: 0 auto; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    .site-header { border-bottom: 1px solid var(--line); background: var(--paper); }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 76px; }
+    .brand { display: inline-flex; min-width: 0; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--green-deep); border-radius: 50%; color: var(--green-deep); }
+    .brand-mark svg { width: 29px; height: 29px; }
+    .brand-copy { white-space: nowrap; }
+    .brand-copy span { color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: .13em; }
+    .back-link { flex: 0 0 auto; color: var(--green-deep); font-size: 13px; font-weight: 700; }
+    .back-link span { display: inline-block; margin-right: 7px; transition: transform .2s ease; }
+    .back-link:hover span { transform: translateX(-4px); }
+
+    .series-header { padding: 104px 0 78px; border-bottom: 1px solid var(--line); }
+    .series-header-inner { width: min(calc(100% - 48px), 820px); margin: 0 auto; }
+    .series-kicker { margin: 0 0 19px; color: var(--green-deep); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    .series-title { max-width: 720px; margin: 0 0 14px; overflow-wrap: anywhere; font-family: var(--serif); font-size: clamp(51px, 8vw, 92px); font-weight: 400; letter-spacing: -.065em; line-height: .98; }
+    .series-title span { display: block; margin-top: 13px; color: var(--green-deep); font-family: var(--sans); font-size: clamp(15px, 2vw, 20px); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .series-description { max-width: 650px; margin: 30px 0 0; color: #4D5F54; font-size: 17px; line-height: 2; }
+
+    .series-content { padding: 68px 0 106px; }
+    .series-list { width: min(calc(100% - 48px), var(--max-width)); margin: 0 auto; border-top: 1px solid var(--line); }
+    .series-item { display: grid; grid-template-columns: 67px minmax(0, 1fr) minmax(150px, .3fr); gap: 25px; align-items: start; padding: 27px 0 29px; border-bottom: 1px solid var(--line); transition: padding-left .22s ease; }
+    .series-item > * { min-width: 0; }
+    .series-item:hover { padding-left: 12px; }
+    .series-number { color: var(--green-deep); font-family: var(--serif); font-size: 25px; line-height: 1.25; }
+    .series-item h2 { margin: 0 0 9px; overflow-wrap: anywhere; font-family: var(--serif); font-size: clamp(24px, 3.5vw, 39px); font-weight: 400; letter-spacing: -.045em; line-height: 1.18; }
+    .series-item p { max-width: 610px; margin: 0; overflow-wrap: anywhere; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .series-meta { display: grid; min-width: 0; justify-items: end; gap: 5px; color: var(--muted); font-size: 11px; line-height: 1.5; text-align: right; }
+    .series-meta > span { min-width: 0; overflow-wrap: anywhere; }
+    .series-tags { max-width: 100%; color: var(--green); font-size: 10px; letter-spacing: .08em; white-space: normal; }
+    .series-empty { padding: 27px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .series-footer-note { width: min(calc(100% - 48px), var(--max-width)); margin: 42px auto 0; color: var(--muted); font-size: 12px; }
+
+    .site-footer { padding: 27px 0 35px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .footer-inner p { margin: 0; }
+    .footer-inner a:hover { color: var(--green-deep); }
+
+    @media (max-width: 650px) {
+      .container, .series-header-inner, .series-list, .series-footer-note { width: min(calc(100% - 32px), var(--max-width)); }
+      .nav-wrap { min-height: 68px; }
+      .brand { gap: 9px; font-size: 13px; }
+      .brand-mark { width: 34px; height: 34px; }
+      .brand-mark svg { width: 26px; height: 26px; }
+      .brand-copy span { font-size: 9px; }
+      .back-link { font-size: 12px; }
+      .series-header { padding: 68px 0 54px; }
+      .series-title { font-size: clamp(48px, 16vw, 70px); }
+      .series-title span { margin-top: 12px; font-size: 13px; }
+      .series-description { margin-top: 25px; font-size: 15px; }
+      .series-content { padding: 45px 0 76px; }
+      .series-item { grid-template-columns: 48px minmax(0, 1fr); gap: 14px; padding: 22px 0 25px; }
+      .series-item h2 { font-size: 25px; }
+      .series-item p { font-size: 13px; }
+      .series-meta { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; justify-items: start; gap: 6px 12px; width: 100%; text-align: left; }
+      .series-footer-note { margin-top: 30px; }
+      .footer-inner { display: block; }
+      .footer-inner a { display: inline-block; margin-top: 10px; }
+    }
+    @media (max-width: 420px) {
+      .brand-copy span { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="返回玄英首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="1"/>
+            <rect x="14" y="14" width="20" height="20" stroke="currentColor" stroke-width="1" transform="rotate(45 24 24)"/>
+            <path d="M9 24H39M24 9V39" stroke="currentColor" stroke-width="1" opacity=".55"/>
+          </svg>
+        </span>
+        <span class="brand-copy">玄英 <span>/ XUAN YING</span></span>
+      </a>
+      <a class="back-link" href="index.html#notes"><span>←</span>返回首页</a>
+    </div>
+  </header>
+
+  <main>
+    <header class="series-header">
+      <div class="series-header-inner">
+        <p class="series-kicker">A small series before departure</p>
+        <h1 class="series-title">去上海之前<span>Before Shanghai</span></h1>
+        <p class="series-description">这是我去上海之前写下的记录。它们关于选择，也关于想象。那时我还没有真正抵达这座城市，但它已经开始改变我对未来的想象。</p>
+      </div>
+    </header>
+
+    <section class="series-content" aria-labelledby="series-list-title">
+      <h2 class="sr-only" id="series-list-title">去上海之前文章列表</h2>
+      <div class="series-list" id="series-list"></div>
+      <p class="series-empty" id="series-empty" hidden>这个系列还没有已发布的记录。</p>
+      <p class="series-footer-note" id="series-footer-note"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 玄英 / 记录仍在继续</p>
+      <a href="index.html#top">回到首页 ↑</a>
+    </div>
+  </footer>
+  <script src="content/content-data.js"></script>
+  <script>
+    const seriesName = '去上海之前';
+    const seriesList = document.querySelector('#series-list');
+    const seriesEmpty = document.querySelector('#series-empty');
+    const seriesFooter = document.querySelector('#series-footer-note');
+    const seriesItems = (Array.isArray(window.siteContent) ? window.siteContent : [])
+      .filter((item) => item && item.type === 'article' && item.series === seriesName && typeof item.slug === 'string')
+      .sort((left, right) => {
+        const leftOrder = Number.isInteger(left.seriesOrder) && left.seriesOrder > 0 ? left.seriesOrder : Number.MAX_SAFE_INTEGER;
+        const rightOrder = Number.isInteger(right.seriesOrder) && right.seriesOrder > 0 ? right.seriesOrder : Number.MAX_SAFE_INTEGER;
+        if (leftOrder !== rightOrder) return leftOrder - rightOrder;
+        return String(left.date || '').localeCompare(String(right.date || ''));
+      });
+
+    function formatDate(value) {
+      return String(value || '—').replace(/-/g, '.');
+    }
+
+    function createSeriesItem(item, index) {
+      if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.slug)) return null;
+      const link = document.createElement('a');
+      link.className = 'series-item';
+      link.href = `articles/${encodeURIComponent(item.slug)}/index.html`;
+
+      const number = document.createElement('div');
+      number.className = 'series-number';
+      number.textContent = String(index + 1).padStart(2, '0');
+
+      const copy = document.createElement('div');
+      const title = document.createElement('h2');
+      title.textContent = String(item.title || '');
+      const summary = document.createElement('p');
+      summary.textContent = String(item.summary || '');
+      copy.append(title, summary);
+
+      const meta = document.createElement('div');
+      meta.className = 'series-meta';
+      const tags = document.createElement('span');
+      tags.className = 'series-tags';
+      tags.textContent = Array.isArray(item.tags) ? item.tags.map((tag) => String(tag)).join(' / ') : '';
+      const date = document.createElement('span');
+      date.textContent = formatDate(item.date);
+      meta.append(tags, date);
+
+      link.append(number, copy, meta);
+      return link;
+    }
+
+    const renderedItems = seriesItems.map(createSeriesItem).filter(Boolean);
+    seriesList.replaceChildren(...renderedItems);
+    seriesEmpty.hidden = renderedItems.length > 0;
+    seriesFooter.textContent = renderedItems.length
+      ? `${renderedItems.length} 条记录都写在真正出发之前。后面的故事，等抵达以后再慢慢补上。`
+      : '后面的故事，等抵达以后再慢慢补上。';
+  </script>
+</body>
+</html>
