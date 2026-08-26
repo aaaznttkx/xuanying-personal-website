@@ -11,6 +11,8 @@ const dataOutput = path.join(outputRoot, 'content', 'content-data.js');
 const siteConfigPath = path.join(projectRoot, 'site.config.json');
 const contentPageSource = path.join(siteRoot, 'content.html');
 const articleStylesOutput = path.join(outputRoot, 'content', 'article.css');
+const robotsOutput = path.join(outputRoot, 'robots.txt');
+const sitemapOutput = path.join(outputRoot, 'sitemap.xml');
 
 const requiredFields = ['type', 'title', 'slug', 'date', 'summary', 'category', 'tags', 'cover', 'sourceUrl', 'status'];
 
@@ -247,6 +249,32 @@ function coverMetaUrl(cover, siteUrl) {
   return staticAssetUrl(cover);
 }
 
+function xmlEscape(value) {
+  return String(value ?? '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&apos;', '"': '&quot;' }[character]));
+}
+
+async function writeRobots(siteUrl) {
+  const sitemapLine = siteUrl ? `\nSitemap: ${siteUrl}/sitemap.xml` : '';
+  await writeFile(robotsOutput, `User-agent: *\nAllow: /${sitemapLine}\n`, 'utf8');
+}
+
+async function writeSitemap(siteUrl, publicItems) {
+  if (!siteUrl) return false;
+  const staticPages = [
+    `${siteUrl}/`,
+    `${siteUrl}/articles.html`,
+    `${siteUrl}/notes.html`,
+    `${siteUrl}/before-shanghai.html`
+  ];
+  const contentPages = publicItems.map((item) => `${siteUrl}/${item.type === 'article' ? 'articles' : 'notes'}/${item.slug}/index.html`);
+  const urls = [...staticPages, ...contentPages]
+    .map((url) => `  <url><loc>${xmlEscape(url)}</loc></url>`)
+    .join('\n');
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  await writeFile(sitemapOutput, sitemap, 'utf8');
+  return true;
+}
+
 async function writeArticleStyles() {
   const source = await readFile(contentPageSource, 'utf8');
   const styleMatch = source.match(/<style>([\s\S]*?)<\/style>/);
@@ -277,6 +305,7 @@ async function writeStaticArticle(item, siteUrl) {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#F6F8F1" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <title>${escapeHtml(item.title)}｜玄英</title>
   <meta name="description" content="${escapeHtml(item.summary)}" />${canonicalMeta}
   <meta property="og:title" content="${escapeHtml(item.title)}" />
@@ -336,6 +365,7 @@ async function writeStaticNote(item, siteUrl) {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#F6F8F1" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <title>${escapeHtml(item.title)}｜玄英</title>
   <meta name="description" content="${escapeHtml(item.summary)}" />${canonicalMeta}
   <meta property="og:title" content="${escapeHtml(item.title)}" />
@@ -394,6 +424,7 @@ async function getMarkdownFiles() {
 
 const { siteUrl } = await readSiteConfig();
 await prepareOutput();
+await writeRobots(siteUrl);
 const files = await getMarkdownFiles();
 const allItems = [];
 const slugs = new Set();
@@ -423,8 +454,10 @@ const staticNotePaths = [];
 for (const item of publicItems.filter((entry) => entry.type === 'note')) {
   staticNotePaths.push(await writeStaticNote(item, siteUrl));
 }
+const sitemapWritten = await writeSitemap(siteUrl, publicItems);
 
 console.log(`Built ${publicItems.length} published item(s) from ${files.length} Markdown file(s).`);
 for (const item of allItems) console.log(`- ${item.status}: ${item.slug} (${item.gallery.length} image(s))`);
 for (const staticPath of staticArticlePaths) console.log(`- static: ${staticPath}`);
 for (const staticPath of staticNotePaths) console.log(`- static: ${staticPath}`);
+console.log(`- sitemap: ${sitemapWritten ? 'written' : 'skipped (siteUrl is empty)'}`);

@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-content.mjs",
+    "check": "node scripts/check-site.mjs",
     "start": "node scripts/serve.mjs",
     "import:wechat": "node scripts/import-wechat.mjs"
   }
