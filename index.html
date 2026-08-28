@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F6F8F1">
+  <meta name="description" content="玄英的个人成长档案：记录大学生活、阅读、AI 学习、英语练习，以及仍在发生的改变。">
+  <title>玄英的生长簿｜个人成长档案</title>
+  <style>
+    :root {
+      --bg: #F6F8F1;
+      --ink: #17251D;
+      --green: #3D8B68;
+      --green-dark: #246044;
+      --green-pale: #DDEBDD;
+      --muted: #718078;
+      --line: #D7E2D7;
+      --paper: #FBFCF7;
+      --serif: "Songti SC", "STSong", "Noto Serif CJK SC", Georgia, serif;
+      --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      --page: min(1180px, calc(100% - 48px));
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(23, 37, 29, .025) 1px, transparent 1px),
+        var(--bg);
+      background-size: 100% 32px;
+      font-family: var(--sans);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      background: radial-gradient(ellipse at 100% 0%, rgba(221, 235, 221, .66) 0, rgba(221, 235, 221, .25) 24%, transparent 51%);
+      pointer-events: none;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    :focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
+    ::selection { color: var(--ink); background: var(--green-pale); }
+
+    .shell { width: var(--page); margin: 0 auto; }
+    .site-header {
+      min-height: 78px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: max-content;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    .leaf-mark { width: 23px; height: 28px; overflow: visible; }
+    .leaf-mark path { fill: none; stroke: var(--green-dark); stroke-width: 1.6; stroke-linecap: round; }
+    .site-nav { display: flex; align-items: center; gap: 30px; }
+    .site-nav a {
+      position: relative;
+      padding: 27px 0 23px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .08em;
+    }
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 20px;
+      left: 0;
+      height: 1px;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .2s ease;
+    }
+    .site-nav a:hover { color: var(--green-dark); }
+    .site-nav a:hover::after { transform: scaleX(1); }
+    .place {
+      justify-self: end;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 13px;
+      letter-spacing: .1em;
+    }
+
+    main { overflow: hidden; }
+    .hero {
+      min-height: 600px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(290px, .75fr);
+      gap: clamp(56px, 8vw, 120px);
+      align-items: end;
+      padding: clamp(82px, 10vw, 135px) 0 92px;
+      border-bottom: 1px solid var(--line);
+    }
+    .kicker, .section-index {
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 780px;
+      margin: 25px 0 30px;
+      font-family: var(--serif);
+      font-size: clamp(54px, 7.5vw, 102px);
+      font-weight: 600;
+      letter-spacing: -.065em;
+      line-height: 1.07;
+      text-wrap: balance;
+    }
+    h1 em { color: var(--green); font-style: normal; }
+    .lead {
+      max-width: 670px;
+      margin: 0;
+      color: #4F6056;
+      font-family: var(--serif);
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.85;
+      text-wrap: pretty;
+    }
+    .hero-note {
+      position: relative;
+      align-self: center;
+      min-height: 300px;
+      padding: 43px 14px 30px 46px;
+      border-left: 1px solid var(--green);
+    }
+    .hero-note::before {
+      content: "“";
+      position: absolute;
+      top: -9px;
+      left: 24px;
+      color: var(--green-pale);
+      font-family: Georgia, serif;
+      font-size: 110px;
+      line-height: 1;
+      z-index: -1;
+    }
+    .hero-note p {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 21px;
+      line-height: 1.9;
+    }
+    .hero-note small {
+      display: block;
+      margin-top: 38px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .12em;
+    }
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 43px;
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .scroll-cue span { transition: transform .2s ease; }
+    .scroll-cue:hover span { transform: translateX(4px); }
+
+    .section { padding: clamp(76px, 9vw, 126px) 0; border-bottom: 1px solid var(--line); }
+    .section-heading {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+      margin-bottom: 54px;
+    }
+    h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(35px, 4.8vw, 59px);
+      font-weight: 600;
+      letter-spacing: -.045em;
+      line-height: 1.18;
+    }
+    .heading-note {
+      max-width: 540px;
+      margin: 17px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .featured {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+    .featured-copy { padding: clamp(35px, 5vw, 67px) clamp(28px, 6vw, 78px) clamp(39px, 5vw, 66px) 0; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      margin-bottom: 24px;
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .featured h3 {
+      max-width: 680px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(31px, 4.4vw, 54px);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -.04em;
+    }
+    .featured-copy > p {
+      max-width: 660px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 34px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--green);
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .featured-visual {
+      position: relative;
+      min-height: 380px;
+      overflow: hidden;
+      border-left: 1px solid var(--ink);
+      background: var(--green-pale);
+    }
+    .featured-visual::before,
+    .featured-visual::after {
+      content: "";
+      position: absolute;
+      width: 46%;
+      height: 74%;
+      bottom: -7%;
+      border: 2px solid rgba(36, 96, 68, .52);
+      border-radius: 100% 0 100% 0;
+      transform-origin: bottom;
+    }
+    .featured-visual::before { left: 22%; transform: rotate(-32deg); }
+    .featured-visual::after { right: 8%; transform: scaleX(-1) rotate(-45deg); }
+    .plant-stem {
+      position: absolute;
+      left: 50%;
+      bottom: -4%;
+      width: 1px;
+      height: 91%;
+      background: var(--green-dark);
+      transform: rotate(5deg);
+    }
+    .visual-caption {
+      position: absolute;
+      right: 24px;
+      bottom: 19px;
+      color: var(--green-dark);
+      font-family: var(--serif);
+      font-size: 12px;
+      letter-spacing: .12em;
+      writing-mode: vertical-rl;
+    }
+
+    .archive-layout {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: clamp(44px, 7vw, 105px);
+    }
+    .filter-group { position: sticky; top: 28px; align-self: start; }
+    .filter-label { margin: 0 0 18px; color: var(--muted); font-size: 12px; letter-spacing: .12em; }
+    .filters { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+    .filter {
+      min-height: 42px;
+      padding: 8px 0;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: left;
+    }
+    .filter::before { content: "—"; display: inline-block; width: 24px; color: transparent; }
+    .filter:hover, .filter.active { color: var(--green-dark); }
+    .filter.active::before { color: var(--green); }
+    .archive-list { border-top: 1px solid var(--ink); }
+    .entry {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: start;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding .2s ease, color .2s ease;
+    }
+    .entry:hover { padding-left: 10px; color: var(--green-dark); }
+    .entry[hidden] { display: none; }
+    .entry time { padding-top: 7px; color: var(--muted); font-size: 12px; }
+    .entry h3 {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-size: clamp(21px, 2.5vw, 29px);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .entry p { margin: 0; color: var(--muted); font-size: 14px; }
+    .entry-tag {
+      padding-top: 7px;
+      color: var(--green-dark);
+      font-size: 11px;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    .now-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: clamp(50px, 9vw, 130px);
+    }
+    .now-intro p {
+      max-width: 450px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+    .practice-list { border-top: 1px solid var(--ink); }
+    .practice {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 20px;
+      padding: 26px 0 29px;
+      border-bottom: 1px solid var(--line);
+    }
+    .practice-number { color: var(--green); font-family: var(--serif); font-size: 14px; }
+    .practice h3 { margin: 0 0 6px; font-family: var(--serif); font-size: 23px; font-weight: 600; }
+    .practice p { margin: 0; color: var(--muted); font-size: 14px; }
+    .progress {
+      height: 2px;
+      margin-top: 16px;
+      overflow: hidden;
+      background: var(--line);
+    }
+    .progress span { display: block; height: 100%; background: var(--green); }
+
+    .letter {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 52px;
+      align-items: end;
+      padding: 80px 0 89px;
+    }
+    .letter h2 { max-width: 780px; }
+    .letter p { max-width: 660px; margin: 22px 0 0; color: var(--muted); }
+    .mail-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 168px;
+      min-height: 50px;
+      padding: 12px 22px;
+      border: 1px solid var(--green-dark);
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      transition: color .2s ease, background .2s ease;
+    }
+    .mail-link:hover { color: var(--bg); background: var(--green-dark); }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 27px 0 36px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .08em;
+    }
+
+    @media (max-width: 850px) {
+      :root { --page: min(100% - 32px, 680px); }
+      .site-header { grid-template-columns: 1fr auto; }
+      .site-nav { order: 3; grid-column: 1 / -1; justify-content: space-between; border-top: 1px solid var(--line); }
+      .site-nav a { padding: 13px 0 14px; }
+      .site-nav a::after { bottom: 10px; }
+      .place { display: none; }
+      .hero, .featured, .now-grid, .letter { grid-template-columns: 1fr; }
+      .hero { gap: 64px; padding-top: 76px; }
+      .hero-note { max-width: 480px; min-height: 0; }
+      .section-heading { grid-template-columns: 1fr; gap: 14px; }
+      .featured-copy { padding-right: 0; }
+      .featured-visual { min-height: 330px; border-top: 1px solid var(--ink); border-left: 0; }
+      .archive-layout { grid-template-columns: 1fr; gap: 31px; }
+      .filter-group { position: static; }
+      .filters { flex-flow: row wrap; gap: 4px 18px; }
+      .filter::before { display: none; }
+      .filter.active { text-decoration: underline; text-decoration-color: var(--green); text-underline-offset: 5px; }
+      .letter { align-items: start; }
+      .mail-link { justify-self: start; }
+    }
+
+    @media (max-width: 560px) {
+      .brand { font-size: 17px; }
+      .leaf-mark { width: 20px; }
+      .site-nav { gap: 13px; }
+      .site-nav a { font-size: 11px; }
+      .hero { min-height: auto; padding-bottom: 66px; }
+      h1 { font-size: clamp(45px, 16vw, 70px); }
+      .hero-note { padding-left: 29px; }
+      .entry { grid-template-columns: 68px minmax(0, 1fr); gap: 15px; }
+      .entry-tag { grid-column: 2; padding: 0; }
+      footer { display: block; }
+      footer span { display: block; margin-top: 7px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header shell">
+    <a class="brand" href="#top" aria-label="返回首页">
+      <svg class="leaf-mark" viewBox="0 0 24 30" aria-hidden="true">
+        <path d="M12 28C11.3 18.2 14.1 10.9 21.5 4.4C13.6 4.5 7.2 8.8 6.8 16.2C6.5 21.1 9 24.2 12 28Z"/>
+        <path d="M11.8 27.7C12.4 18.2 9.5 12.6 2.3 9.2C2.3 16.7 5.2 21.5 11.8 27.7Z"/>
+      </svg>
+      <span>玄英的生长簿</span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="#notes">最近记录</a>
+      <a href="#archive">文章索引</a>
+      <a href="#now">此刻练习</a>
+      <a href="#letter">写信给我</a>
+    </nav>
+    <span class="place">SHANGHAI · 2026</span>
+  </header>
+
+  <main id="top">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div>
+        <div class="kicker">A living archive · 一份持续更新的成长档案</div>
+        <h1 id="hero-title">把还没有答案的日子，<em>认真记下来。</em></h1>
+        <p class="lead">你好，我是玄英，一名在上海读大学的女生。这里不展示一条已经确定的路，而是收集我如何阅读、学习、尝试、迟疑，又重新出发。</p>
+        <a class="scroll-cue" href="#notes">从最近一篇开始 <span aria-hidden="true">→</span></a>
+      </div>
+      <aside class="hero-note" aria-label="写在首页的话">
+        <p>成长不是持续向上的直线。它更像植物，在看不见的地方先长出根，再慢慢靠近光。</p>
+        <small>玄英 · 写于上海的一间宿舍</small>
+      </aside>
+    </section>
+
+    <section class="section shell" id="notes" aria-labelledby="notes-title">
+      <header class="section-heading">
+        <span class="section-index">01 / Latest note</span>
+        <div>
+          <h2 id="notes-title">最近写下的</h2>
+          <p class="heading-note">一次不急着总结的记录：先保存当时的困惑、行动和微小变化。</p>
+        </div>
+      </header>
+
+      <article class="featured">
+        <div class="featured-copy">
+          <div class="meta"><span>大学生活</span><time datetime="2026-08-20">2026.08.20</time><span>6 分钟阅读</span></div>
+          <h3>来到上海之前，我以为“离家远”就等于自由</h3>
+          <p>新的城市并不会自动给人答案。真正开始独立，是我第一次认真安排自己的时间、承担一次选择，也接受事情可能做得不够好。</p>
+          <a class="read-link" href="#archive">在文章索引中继续读 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="featured-visual" aria-label="抽象植物线稿装饰">
+          <i class="plant-stem" aria-hidden="true"></i>
+          <span class="visual-caption">GROW TOWARD THE LIGHT</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="section shell" id="archive" aria-labelledby="archive-title">
+      <header class="section-heading">
+        <span class="section-index">02 / Journal index</span>
+        <div>
+          <h2 id="archive-title">文章索引</h2>
+          <p class="heading-note">按我此刻真正关心的事情分类。它们会随着生活变化，不保证完整，也不假装成熟。</p>
+        </div>
+      </header>
+
+      <div class="archive-layout">
+        <aside class="filter-group" aria-label="文章分类筛选">
+          <p class="filter-label">按主题浏览</p>
+          <div class="filters">
+            <button class="filter active" type="button" data-filter="all">全部记录</button>
+            <button class="filter" type="button" data-filter="growth">成长感悟</button>
+            <button class="filter" type="button" data-filter="campus">大学生活</button>
+            <button class="filter" type="button" data-filter="reading">阅读记录</button>
+            <button class="filter" type="button" data-filter="ai">AI 学习</button>
+            <button class="filter" type="button" data-filter="english">英语练习</button>
+          </div>
+        </aside>
+
+        <div class="archive-list" aria-live="polite">
+          <article class="entry" data-category="campus growth">
+            <time datetime="2026-08-20">08 / 20</time>
+            <div><h3>来到上海之前，我以为“离家远”就等于自由</h3><p>关于新城市、自主决定和慢慢长出边界。</p></div>
+            <span class="entry-tag">大学生活</span>
+          </article>
+          <article class="entry" data-category="ai growth">
+            <time datetime="2026-08-12">08 / 12</time>
+            <div><h3>我怎样用 AI 修改第一篇公开文章</h3><p>不是让工具替我表达，而是借它看见表达中的含混。</p></div>
+            <span class="entry-tag">AI 学习</span>
+          </article>
+          <article class="entry" data-category="reading">
+            <time datetime="2026-08-03">08 / 03</time>
+            <div><h3>七月阅读手记：那些让我重新理解“选择”的句子</h3><p>三本书，六处划线，以及它们怎样进入我的现实生活。</p></div>
+            <span class="entry-tag">阅读记录</span>
+          </article>
+          <article class="entry" data-category="english growth">
+            <time datetime="2026-07-27">07 / 27</time>
+            <div><h3>七天英语口语记录之后，我还在害怕开口吗？</h3><p>比起“流利”，我先学会允许自己说得笨拙。</p></div>
+            <span class="entry-tag">英语练习</span>
+          </article>
+          <article class="entry" data-category="growth campus">
+            <time datetime="2026-07-16">07 / 16</time>
+            <div><h3>低阅读量之后，为什么我还是想写下一篇</h3><p>写作的回报，也许先是把模糊的自己说清楚。</p></div>
+            <span class="entry-tag">成长感悟</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="now" aria-labelledby="now-title">
+      <div class="now-grid">
+        <div class="now-intro">
+          <span class="section-index">03 / Now practicing</span>
+          <h2 id="now-title" style="margin-top:20px">此刻，正在练习</h2>
+          <p>不是“已经擅长”，而是愿意持续投入一段时间、用真实作品验证的方向。进度只表示这一次练习走到了哪里。</p>
+        </div>
+        <div class="practice-list">
+          <article class="practice">
+            <span class="practice-number">01</span>
+            <div><h3>用英语说清一件小事</h3><p>连续 7 天口语记录：完成 4 天</p><div class="progress" aria-label="英语口语练习进度 57%"><span style="width:57%"></span></div></div>
+          </article>
+          <article class="practice">
+            <span class="practice-number">02</span>
+            <div><h3>把 AI 用进真实的学习流程</h3><p>整理资料、追踪进度，并保留自己的判断</p><div class="progress" aria-label="AI 学习流程练习进度 42%"><span style="width:42%"></span></div></div>
+          </article>
+          <article class="practice">
+            <span class="practice-number">03</span>
+            <div><h3>稳定地公开写作</h3><p>每次从一个真实问题开始，不追赶空泛的热度</p><div class="progress" aria-label="公开写作练习进度 68%"><span style="width:68%"></span></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="letter shell" id="letter" aria-labelledby="letter-title">
+      <div>
+        <span class="section-index">04 / Say hello</span>
+        <h2 id="letter-title" style="margin-top:20px">如果某篇记录也让你想起自己的经历，欢迎写信来。</h2>
+        <p>可以聊大学生活、一本书、AI 与学习，或只是分享一个还没有答案的问题。我期待认识少数真正有共同兴趣的人。</p>
+      </div>
+      <a class="mail-link" href="mailto:2836677411@qq.com">写一封邮件 ↗</a>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>© 2026 玄英的生长簿</span>
+    <span>在上海，保持清醒，也允许自己慢慢生长。</span>
+  </footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll('.filter');
+    const entries = document.querySelectorAll('.entry');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach((item) => item.classList.toggle('active', item === button));
+        entries.forEach((entry) => {
+          const categories = entry.dataset.category.split(' ');
+          entry.hidden = filter !== 'all' && !categories.includes(filter);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
