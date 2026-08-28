@@ -250,6 +250,15 @@
     .section-link { display: inline-flex; margin-top: 16px; color: var(--green-deep); font-size: 12px; font-weight: 800; }
     .section-link:hover { color: var(--green); }
 
+    .contact-section { background: var(--paper-deep); }
+    .contact-grid { display: grid; grid-template-columns: minmax(170px, .44fr) minmax(0, 1fr); gap: clamp(45px, 11vw, 160px); }
+    .contact-copy { max-width: 620px; }
+    .contact-title { max-width: 760px; margin-bottom: 23px; font-family: var(--serif); font-size: clamp(36px, 5vw, 61px); font-weight: 400; letter-spacing: -.055em; line-height: 1.08; }
+    .contact-text { max-width: 580px; margin-bottom: 18px; color: #4D5F54; font-size: 16px; line-height: 2; }
+    .contact-address { max-width: 100%; margin: 5px 0 26px; color: var(--green-deep); font-family: var(--serif); font-size: clamp(22px, 3vw, 31px); line-height: 1.35; }
+    .contact-email { overflow-wrap: anywhere; word-break: break-word; }
+    .contact-email:hover, .contact-email:focus-visible { color: var(--green); }
+    .contact-note { margin: -8px 0 27px; color: var(--muted); font-size: 12px; line-height: 1.7; }
     .site-footer { padding: 27px 0 35px; color: var(--muted); font-size: 11px; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .footer-inner p { margin: 0; }
@@ -292,6 +301,7 @@
       .doing-head, .notes-head { display: block; margin-bottom: 30px; }
       .section-intro { margin-top: 15px; }
       .doing-item { grid-template-columns: 57px minmax(0, .75fr) minmax(0, 1.25fr); gap: 15px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 30px; }
       .note-row { grid-template-columns: 52px minmax(0, 1fr); gap: 15px; }
       .note-meta { grid-column: 2; display: flex; flex-wrap: wrap; justify-items: start; align-items: center; gap: 6px 12px; min-width: 0; text-align: left; }
       .note-meta > span { min-width: 0; overflow-wrap: anywhere; }
@@ -304,6 +314,8 @@
       .brand-mark svg { width: 26px; height: 26px; }
       .brand-copy span { font-size: 9px; }
       .hero { padding: 61px 0 75px; }
+      .contact-title { font-size: clamp(36px, 13vw, 57px); }
+      .contact-email { font-size: 22px; }
       .hero-title { font-size: clamp(45px, 15vw, 69px); }
       .hero-copy { font-size: 15px; }
       .hero-actions { align-items: flex-start; flex-direction: column; gap: 14px; }
@@ -347,6 +359,7 @@
         <a href="articles.html">文章</a>
         <a href="notes.html">手记</a>
         <a href="#doing">正在做</a>
+        <a href="#contact" data-contact-link hidden>联系我</a>
       </nav>
     </div>
   </header>
@@ -439,6 +452,21 @@
       </div>
     </section>
 
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title" hidden>
+      <div class="container contact-grid">
+        <p class="section-label">04 / 联系方式<span>Get in touch</span></p>
+        <div class="contact-copy reveal delay-1">
+          <h2 class="contact-title" id="contact-title">和我聊聊</h2>
+          <p class="contact-text">如果你也在探索大学生活、阅读、AI、个人成长或新的可能，欢迎发邮件给我。</p>
+          <p class="contact-text">无论是认识彼此、交流学习，讨论一篇文章，聊聊一个想法，还是沟通潜在的合作与机会，都可以从一封简单的邮件开始。</p>
+          <p class="contact-text">也欢迎对我的经历、文章或作品感兴趣的朋友、合作伙伴和招聘/面试方联系我。</p>
+          <p class="contact-address"><span>邮箱：</span><a class="contact-email" data-contact-email hidden></a></p>
+          <p class="contact-note">邮件可能无法即时回复，但我会在方便时阅读。</p>
+          <a class="button" data-contact-mail hidden>发邮件给我 →</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -448,11 +476,16 @@
     </div>
   </footer>
 
+  <script src="content/site-config.js"></script>
   <script src="content/content-data.js"></script>
   <script>
     const notesList = document.querySelector('#notes-list');
     const notesEmpty = document.querySelector('#notes-empty');
     const contentSummary = document.querySelector('#content-summary');
+    const contactSection = document.querySelector('#contact');
+    const contactNavLink = document.querySelector('[data-contact-link]');
+    const contactEmailLink = document.querySelector('[data-contact-email]');
+    const contactMailLink = document.querySelector('[data-contact-mail]');
     const publishedItems = Array.isArray(window.siteContent) ? window.siteContent : [];
 
     function formatDate(value) {
@@ -517,6 +550,21 @@
       const latestDate = publishedItems.find((item) => item.date)?.date || '';
       contentSummary.textContent = `目前有 ${countLabel}。最近更新于 ${formatDate(latestDate)}。`;
     }
+
+    function setupContact() {
+      const configuredEmail = String(window.siteConfig?.contactEmail || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configuredEmail)) return;
+      const mailto = 'mailto:' + configuredEmail;
+      contactEmailLink.textContent = configuredEmail;
+      contactEmailLink.href = mailto;
+      contactMailLink.href = mailto;
+      contactSection.hidden = false;
+      contactNavLink.hidden = false;
+      contactEmailLink.hidden = false;
+      contactMailLink.hidden = false;
+    }
+
+    setupContact();
 
     const menuButton = document.querySelector('.menu-button');
     const nav = document.querySelector('#site-nav');

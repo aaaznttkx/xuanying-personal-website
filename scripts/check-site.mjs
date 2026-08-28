@@ -84,6 +84,17 @@ async function readSiteUrl() {
   }
 }
 
+async function readContactEmail() {
+  const config = JSON.parse(await readFile(siteConfigPath, 'utf8'));
+  const rawContactEmail = String(config.contactEmail ?? '').trim();
+  if (!rawContactEmail) return '';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawContactEmail)) {
+    fail('site.config.json: contactEmail must be a valid email address or be empty');
+    return '';
+  }
+  return rawContactEmail;
+}
+
 function localTarget(reference, relativeFile) {
   const url = new URL(reference, `http://local/${relativeFile}`);
   let target = decodeURIComponent(url.pathname.replace(/^\//, ''));
@@ -166,9 +177,23 @@ async function checkPublishedContent(items, sourceItems, siteUrl) {
 }
 
 async function checkRequiredPages() {
-  for (const file of ['index.html', 'articles.html', 'notes.html', 'before-shanghai.html', '404.html', 'favicon.svg', 'robots.txt']) {
+  for (const file of ['index.html', 'articles.html', 'notes.html', 'before-shanghai.html', '404.html', 'favicon.svg', 'robots.txt', 'content/site-config.js']) {
     if (!(await exists(path.join(outputRoot, file)))) fail(`missing generated file: outputs/${file}`);
   }
+}
+
+async function checkContact(contactEmail) {
+  const homepagePath = path.join(outputRoot, 'index.html');
+  const configPath = path.join(outputRoot, 'content', 'site-config.js');
+  const homepage = await readFile(homepagePath, 'utf8');
+  const publicConfig = await readFile(configPath, 'utf8');
+  const expectedConfig = 'window.siteConfig = ' + JSON.stringify({ contactEmail }, null, 2) + ';';
+  if (!publicConfig.includes(expectedConfig)) fail('outputs/content/site-config.js does not match site.config.json');
+  if (!homepage.includes('data-contact-link') || !homepage.includes('data-contact-email') || !homepage.includes('data-contact-mail')) {
+    fail('index.html: contact elements are incomplete');
+  }
+  if (!contactEmail && !homepage.match(/id="contact"[^>]*\bhidden\b/)) fail('index.html: empty contactEmail should hide the contact section');
+  if (!contactEmail && !homepage.match(/data-contact-link[^>]*\bhidden\b/)) fail('index.html: empty contactEmail should hide the contact navigation link');
 }
 
 async function checkArticleImages() {
@@ -219,7 +244,9 @@ for (const filePath of contentFiles) {
 }
 const publicItems = await readContentData();
 const siteUrl = await readSiteUrl();
+const contactEmail = await readContactEmail();
 await checkRequiredPages();
+await checkContact(contactEmail);
 await checkPublishedContent(publicItems, sourceItems, siteUrl);
 await checkArticleImages();
 const generatedFiles = await walk(outputRoot);

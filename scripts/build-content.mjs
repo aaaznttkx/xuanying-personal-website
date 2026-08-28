@@ -8,6 +8,7 @@ const contentRoot = path.join(projectRoot, 'content');
 const contentRoots = [path.join(contentRoot, 'articles'), path.join(contentRoot, 'notes')];
 const outputRoot = path.join(projectRoot, 'outputs');
 const dataOutput = path.join(outputRoot, 'content', 'content-data.js');
+const siteConfigOutput = path.join(outputRoot, 'content', 'site-config.js');
 const siteConfigPath = path.join(projectRoot, 'site.config.json');
 const contentPageSource = path.join(siteRoot, 'content.html');
 const articleStylesOutput = path.join(outputRoot, 'content', 'article.css');
@@ -64,7 +65,11 @@ function parseExternalUrl(value, filePath) {
 async function readSiteConfig() {
   const config = JSON.parse(await readFile(siteConfigPath, 'utf8'));
   const rawSiteUrl = String(config.siteUrl ?? '').trim();
-  if (!rawSiteUrl) return { siteUrl: '' };
+  const contactEmail = String(config.contactEmail ?? '').trim();
+  if (contactEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail)) {
+    throw new Error(siteConfigPath + ': contactEmail must be a valid email address or be empty');
+  }
+  if (!rawSiteUrl) return { siteUrl: '', contactEmail };
   let siteUrl;
   try {
     siteUrl = new URL(rawSiteUrl);
@@ -74,7 +79,12 @@ async function readSiteConfig() {
   if (!['http:', 'https:'].includes(siteUrl.protocol)) {
     throw new Error(`${siteConfigPath}: siteUrl must be a valid http or https URL`);
   }
-  return { siteUrl: siteUrl.href.replace(/\/$/, '') };
+  return { siteUrl: siteUrl.href.replace(/\/$/, ''), contactEmail };
+}
+
+async function writeSiteConfig(contactEmail) {
+  await mkdir(path.dirname(siteConfigOutput), { recursive: true });
+  await writeFile(siteConfigOutput, 'window.siteConfig = ' + JSON.stringify({ contactEmail }, null, 2) + ';\n', 'utf8');
 }
 
 async function normalizeCover(value, filePath) {
@@ -439,10 +449,11 @@ async function getMarkdownFiles() {
   return files.sort();
 }
 
-const { siteUrl } = await readSiteConfig();
+const { siteUrl, contactEmail } = await readSiteConfig();
 await prepareOutput();
 await writeRobots(siteUrl);
 await writeSitePageMetadata(siteUrl);
+await writeSiteConfig(contactEmail);
 const files = await getMarkdownFiles();
 const allItems = [];
 const slugs = new Set();
