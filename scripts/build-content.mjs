@@ -341,6 +341,8 @@ async function writeStaticArticle(item, siteUrl) {
   <link rel="stylesheet" href="../../content/article.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="../../index.html" aria-label="返回玄英首页">
@@ -350,7 +352,7 @@ async function writeStaticArticle(item, siteUrl) {
       <a class="back-link" href="../../articles.html">← 返回文章列表</a>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <header class="article-header">
       <div class="article-header-inner">
         <p class="article-kicker">${escapeHtml(item.category)}</p>
@@ -361,11 +363,21 @@ async function writeStaticArticle(item, siteUrl) {
         ${sourceButton}
       </div>
     </header>
-    <article class="article-body">
+    <article class="article-body" aria-label="正文">
       ${articleContent}
       <div class="article-source">${sourceFooter}</div>
     </article>
   </main>
+  <script>
+    const progress = document.querySelector('#reading-progress');
+    function updateReadingProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+    updateReadingProgress();
+  </script>
 </body>
 </html>
 `;
@@ -401,6 +413,8 @@ async function writeStaticNote(item, siteUrl) {
   <link rel="stylesheet" href="../../content/article.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="../../index.html" aria-label="返回玄英首页">
@@ -410,7 +424,7 @@ async function writeStaticNote(item, siteUrl) {
       <a class="back-link" href="../../notes.html">← 返回手记列表</a>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <header class="article-header">
       <div class="article-header-inner">
         <p class="article-kicker">手记 / ${escapeHtml(item.category)}</p>
@@ -420,10 +434,20 @@ async function writeStaticNote(item, siteUrl) {
         <p class="article-lede">${escapeHtml(item.summary)}</p>
       </div>
     </header>
-    <article class="article-body">
+    <article class="article-body" aria-label="正文">
       ${noteContent}
     </article>
   </main>
+  <script>
+    const progress = document.querySelector('#reading-progress');
+    function updateReadingProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+    updateReadingProgress();
+  </script>
 </body>
 </html>
 `;

@@ -18,7 +18,7 @@
       --green: #3D8B68;
       --green-deep: #246044;
       --green-pale: #DDEBDD;
-      --muted: #718078;
+      --muted: #5F7066;
       --line: #D7E2D7;
       --white: #FCFDF9;
       --serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
@@ -27,7 +27,7 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
     body {
       margin: 0;
       color: var(--ink);
@@ -40,6 +40,20 @@
     a { color: inherit; text-decoration: none; }
     button { font: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 30;
+      padding: 9px 13px;
+      color: var(--paper);
+      background: var(--green-deep);
+      font-size: 12px;
+      transform: translateY(-160%);
+      transition: transform .2s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
     .container { width: min(calc(100% - 48px), var(--max-width)); margin: 0 auto; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
@@ -102,6 +116,7 @@
     .nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); }
     .menu-button {
       display: none;
+      min-height: 44px;
       padding: 7px 0 7px 10px;
       border: 0;
       color: var(--green-deep);
@@ -111,7 +126,7 @@
     }
     .menu-button span { margin-left: 7px; font-size: 17px; line-height: 1; }
 
-    .hero { padding: 112px 0 124px; }
+    .hero { padding: 112px 0 124px; border-bottom: 1px solid var(--line); }
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
@@ -174,6 +189,28 @@
       transition: color .2s ease, border-color .2s ease;
     }
     .button-secondary:hover, .button-secondary:focus-visible { border-color: var(--ink); color: var(--green); }
+    .hero-context {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 17px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .hero-context span + span { position: relative; }
+    .hero-context span + span::before {
+      position: absolute;
+      top: 50%;
+      left: -10px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--green);
+      content: "";
+      transform: translateY(-50%);
+    }
 
     .hero-symbol-wrap { display: grid; justify-items: center; gap: 22px; }
     .hero-symbol {
@@ -239,6 +276,8 @@
       transition: padding-left .22s ease, background .22s ease;
     }
     .note-row:hover { padding-left: 12px; }
+    .note-row:focus-visible { position: relative; z-index: 1; padding-left: 12px; background: var(--paper-deep); }
+    .note-row.featured { background: linear-gradient(90deg, transparent, rgba(238, 243, 234, .7)); }
     .note-number { color: var(--green-deep); font-family: var(--serif); font-size: 23px; line-height: 1.3; }
     .note-row h3 { margin: 0 0 6px; overflow-wrap: anywhere; font-family: var(--serif); font-size: clamp(20px, 2.6vw, 29px); font-weight: 400; letter-spacing: -.035em; line-height: 1.25; }
     .note-row p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
@@ -248,7 +287,7 @@
     .note-tags { max-width: 170px; color: var(--green); font-size: 10px; line-height: 1.5; }
     .notes-empty { margin: 0; padding: 26px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
     .section-link { display: inline-flex; margin-top: 16px; color: var(--green-deep); font-size: 12px; font-weight: 800; }
-    .section-link:hover { color: var(--green); }
+    .section-link:hover, .section-link:focus-visible { color: var(--green); }
 
     .contact-section { background: var(--paper-deep); }
     .contact-grid { display: grid; grid-template-columns: minmax(170px, .44fr) minmax(0, 1fr); gap: clamp(45px, 11vw, 160px); }
@@ -319,6 +358,7 @@
       .hero-title { font-size: clamp(45px, 15vw, 69px); }
       .hero-copy { font-size: 15px; }
       .hero-actions { align-items: flex-start; flex-direction: column; gap: 14px; }
+      .hero-context { margin-top: 22px; line-height: 1.6; }
       .button, .button-secondary { width: fit-content; }
       .hero-symbol-wrap { gap: 17px; }
       .hero-symbol { width: min(84vw, 300px); }
@@ -343,6 +383,7 @@
   <meta property="og:url" content="https://xuanying.world/" />
 </head>
 <body>
+  <a class="skip-link" href="#top">跳到主要内容</a>
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="#top" aria-label="返回玄英首页">
@@ -366,7 +407,7 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="reveal">
@@ -377,8 +418,9 @@
             <a class="button" href="before-shanghai.html">阅读文章</a>
             <a class="button-secondary" href="#about">了解我</a>
           </div>
+          <p class="hero-context" aria-label="网站内容方向"><span>个人档案</span><span>阅读 / AI / 英语</span><span>持续更新</span></p>
         </div>
-        <div class="hero-symbol-wrap reveal delay-2" aria-label="玄英的圆形几何个人标志">
+        <div class="hero-symbol-wrap reveal delay-2" role="img" aria-label="玄英的圆形几何个人标志">
           <div class="hero-symbol">
             <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <circle cx="120" cy="120" r="86" stroke="#246044" stroke-width="1.5"/>
@@ -388,7 +430,7 @@
               <path d="M84 84L156 156M156 84L84 156" stroke="#3D8B68" stroke-width="1" opacity=".65"/>
               <circle cx="120" cy="120" r="7" fill="#246044"/>
               <text x="120" y="115" fill="#246044" font-size="19" text-anchor="middle" font-family="serif">玄英</text>
-              <text x="120" y="137" fill="#718078" font-size="7" letter-spacing="2" text-anchor="middle" font-family="sans-serif">KEEP GOING</text>
+              <text x="120" y="137" fill="#5F7066" font-size="7" letter-spacing="2" text-anchor="middle" font-family="sans-serif">KEEP GOING</text>
             </svg>
           </div>
           <div class="symbol-caption"><span>FROM GUANGXI</span><span>NEXT STOP: SHANGHAI</span></div>
@@ -502,7 +544,7 @@
     function createNoteRow(item, index) {
       if (!item || typeof item.slug !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.slug)) return null;
       const link = document.createElement('a');
-      link.className = 'note-row reveal';
+      link.className = `note-row reveal${index === 0 ? ' featured' : ''}`;
       link.href = contentHref(item);
 
       const number = document.createElement('div');
@@ -576,6 +618,21 @@
       menuButton.setAttribute('aria-expanded', String(!isOpen));
       menuButton.querySelector('span').textContent = isOpen ? '＋' : '×';
       nav.classList.toggle('is-open', !isOpen);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || menuButton.getAttribute('aria-expanded') !== 'true') return;
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.querySelector('span').textContent = '＋';
+      nav.classList.remove('is-open');
+      menuButton.focus();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!nav.classList.contains('is-open') || nav.contains(event.target) || menuButton.contains(event.target)) return;
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.querySelector('span').textContent = '＋';
+      nav.classList.remove('is-open');
     });
 
     nav.querySelectorAll('a').forEach((link) => {

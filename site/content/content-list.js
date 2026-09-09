@@ -2,6 +2,7 @@ const requestedType = document.body.dataset.contentType;
 const items = window.siteContent.filter((item) => item.type === requestedType);
 const list = document.querySelector('#content-list');
 const emptyState = document.querySelector('#content-empty');
+const countLabel = document.querySelector('#content-count');
 
 function formatDate(value) {
   return String(value || '—').replace(/-/g, '.');
@@ -52,3 +53,7 @@ function createContentRow(item, index) {
 list.replaceChildren(...items.map(createContentRow).filter(Boolean));
 
 if (items.length === 0) emptyState.hidden = false;
+if (countLabel) {
+  const label = requestedType === 'article' ? '篇文章' : '条手记';
+  countLabel.textContent = items.length ? `${items.length} ${label} · 按时间更新` : `还没有公开的${label}`;
+}

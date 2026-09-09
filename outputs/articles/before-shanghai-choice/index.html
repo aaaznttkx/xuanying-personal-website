@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="../../content/article.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="../../index.html" aria-label="返回玄英首页">
@@ -24,7 +26,7 @@
       <a class="back-link" href="../../articles.html">← 返回文章列表</a>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <header class="article-header">
       <div class="article-header-inner">
         <p class="article-kicker">去上海之前</p>
@@ -35,10 +37,20 @@
         <a class="source-link source-button" href="https://mp.weixin.qq.com/s/UOxVkAtjKygnVTaHaD3Frw" target="_blank" rel="noopener noreferrer">查看公众号原文 ↗</a>
       </div>
     </header>
-    <article class="article-body">
+    <article class="article-body" aria-label="正文">
       <div class="article-markdown"><a class="article-markdown-image" href="../../public/images/articles/choice-shanghai/01.jpg" target="_blank" rel="noopener noreferrer" aria-label="查看第 1 张原图"><img src="../../public/images/articles/choice-shanghai/01.jpg" alt="公众号贴图 01" loading="lazy" decoding="async"></a><a class="article-markdown-image" href="../../public/images/articles/choice-shanghai/02.jpg" target="_blank" rel="noopener noreferrer" aria-label="查看第 2 张原图"><img src="../../public/images/articles/choice-shanghai/02.jpg" alt="公众号贴图 02" loading="lazy" decoding="async"></a><a class="article-markdown-image" href="../../public/images/articles/choice-shanghai/03.jpg" target="_blank" rel="noopener noreferrer" aria-label="查看第 3 张原图"><img src="../../public/images/articles/choice-shanghai/03.jpg" alt="公众号贴图 03" loading="lazy" decoding="async"></a><a class="article-markdown-image" href="../../public/images/articles/choice-shanghai/04.jpg" target="_blank" rel="noopener noreferrer" aria-label="查看第 4 张原图"><img src="../../public/images/articles/choice-shanghai/04.jpg" alt="公众号贴图 04" loading="lazy" decoding="async"></a><a class="article-markdown-image" href="../../public/images/articles/choice-shanghai/05.jpg" target="_blank" rel="noopener noreferrer" aria-label="查看第 5 张原图"><img src="../../public/images/articles/choice-shanghai/05.jpg" alt="公众号贴图 05" loading="lazy" decoding="async"></a><a class="article-markdown-image" href="../../public/images/articles/choice-shanghai/06.jpg" target="_blank" rel="noopener noreferrer" aria-label="查看第 6 张原图"><img src="../../public/images/articles/choice-shanghai/06.jpg" alt="公众号贴图 06" loading="lazy" decoding="async"></a></div>
       <div class="article-source"><p>本文整理自微信公众号「玄英札记」。<br>如需查看完整原文，请访问<a class="source-link" href="https://mp.weixin.qq.com/s/UOxVkAtjKygnVTaHaD3Frw" target="_blank" rel="noopener noreferrer">微信公众号原文 ↗</a>。</p></div>
     </article>
   </main>
+  <script>
+    const progress = document.querySelector('#reading-progress');
+    function updateReadingProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+    updateReadingProgress();
+  </script>
 </body>
 </html>
