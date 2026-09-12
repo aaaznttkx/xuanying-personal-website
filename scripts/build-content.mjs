@@ -15,7 +15,7 @@ const articleStylesOutput = path.join(outputRoot, 'content', 'article.css');
 const robotsOutput = path.join(outputRoot, 'robots.txt');
 const sitemapOutput = path.join(outputRoot, 'sitemap.xml');
 
-const requiredFields = ['type', 'title', 'slug', 'date', 'summary', 'category', 'tags', 'cover', 'sourceUrl', 'status'];
+const requiredFields = ['type', 'title', 'slug', 'date', 'summary', 'category', 'tags', 'cover', 'status'];
 
 async function prepareOutput() {
   const relativeOutput = path.relative(projectRoot, outputRoot);
@@ -46,18 +46,17 @@ function parseScalar(value) {
   }
   return trimmed;
 }
-
-function parseExternalUrl(value, filePath) {
+function parseHttpUrl(value, filePath) {
   const raw = String(value ?? '').trim();
   if (!raw) return '';
   let url;
   try {
     url = new URL(raw);
   } catch {
-    throw new Error(`${filePath}: sourceUrl must be a valid http or https URL`);
+    throw new Error(`${filePath}: cover must be a valid http or https URL`);
   }
   if (!['http:', 'https:'].includes(url.protocol)) {
-    throw new Error(`${filePath}: sourceUrl must be a valid http or https URL`);
+    throw new Error(`${filePath}: cover must be a valid http or https URL`);
   }
   return url.href;
 }
@@ -90,7 +89,7 @@ async function writeSiteConfig(contactEmail) {
 async function normalizeCover(value, filePath) {
   const coverReference = String(value ?? '').trim();
   if (!coverReference) return '';
-  if (/^https?:\/\//i.test(coverReference)) return parseExternalUrl(coverReference, filePath);
+  if (/^https?:\/\//i.test(coverReference)) return parseHttpUrl(coverReference, filePath);
 
   const sourceCover = path.resolve(path.dirname(filePath), coverReference);
   const relativeCover = path.relative(contentRoot, sourceCover).replaceAll(path.sep, '/');
@@ -138,7 +137,6 @@ async function parseMarkdownFile(source, filePath) {
     tags: frontMatter.tags,
     summary: frontMatter.summary,
     cover,
-    sourceUrl: parseExternalUrl(frontMatter.sourceUrl, filePath),
     status: frontMatter.status,
     bodyMarkdown: normalizedBody,
     gallery
@@ -318,10 +316,7 @@ async function writeStaticArticle(item, siteUrl) {
   const canonicalMeta = pageUrl ? `\n  <link rel="canonical" href="${escapeHtml(pageUrl)}" />` : '';
   const ogUrlMeta = pageUrl ? `\n  <meta property="og:url" content="${escapeHtml(pageUrl)}" />` : '';
   const ogImageMeta = ogImage ? `\n  <meta property="og:image" content="${escapeHtml(ogImage)}" />` : '';
-  const sourceButton = item.sourceUrl ? `<a class="source-link source-button" href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看公众号原文 ↗</a>` : '';
-  const sourceFooter = item.sourceUrl
-    ? `<p>本文整理自微信公众号「玄英札记」。<br>如需查看完整原文，请访问<a class="source-link" href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">微信公众号原文 ↗</a>。</p>`
-    : '<p>本文整理自微信公众号「玄英札记」。</p>';
+
   const articleContent = item.bodyMarkdown
     ? `<div class="article-markdown">${renderMarkdown(item.bodyMarkdown, item)}</div>`
     : renderGallery(item);
@@ -360,12 +355,10 @@ async function writeStaticArticle(item, siteUrl) {
         <div class="article-meta"><span>${escapeHtml(item.date || '—')}</span><span>${escapeHtml(item.category)}</span></div>
         <p class="article-tags">${tags}</p>
         <p class="article-lede">${escapeHtml(item.summary)}</p>
-        ${sourceButton}
       </div>
     </header>
     <article class="article-body" aria-label="正文">
       ${articleContent}
-      <div class="article-source">${sourceFooter}</div>
     </article>
   </main>
   <script>

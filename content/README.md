@@ -18,14 +18,13 @@ summary: "列表页使用的简短摘要"
 category: "分类"
 tags: ["标签一", "标签二"]
 cover: ""
-sourceUrl: ""
 status: draft
 series: "可选系列名称"
 seriesOrder: 1
 ---
 ```
 
-`type` 使用 `article` 或 `note`；`status: draft` 的内容不会进入公开页面，改为 `published` 后才会在网站显示。日期暂时不确定时可以留空，不需要编造日期。`series` 和 `seriesOrder` 都是可选字段；只有已发布且填写了 `series` 的内容才会出现在对应系列页，系列内按 `seriesOrder` 从小到大排列。
+`type` 使用 `article` 或 `note`；`status: draft` 的内容不会进入公开页面，改为 `published` 后才会在网站显示。日期暂时不确定时可以留空，不需要编造日期。`series` 和 `seriesOrder` 都是可选字段；只有已发布且填写了 `series` 的内容才会出现在对应系列页，系列内按 `seriesOrder` 从小到大排列。文章正文直接写在 Markdown 文件中，网站不依赖公众号跳转来阅读。
 
 ## 站点地址
 
@@ -75,4 +74,4 @@ npm start
 node scripts/import-wechat.mjs --url "https://mp.weixin.qq.com/s/..." --slug "my-article" --category "分类" --tags "标签一,标签二"
 ```
 
-导入器只在页面可访问时读取文章 HTML 和图片；如果公众号页面要求验证，会明确报错且不写入不完整文件。导入后运行 `npm run build`。
+导入器只在页面可访问时读取文章 HTML 和图片；正文和图片都会保存到本地 Markdown 内容源中，网站发布页不再跳转到公众号原文。若公众号页面要求验证，会明确报错且不写入不完整文件。导入后运行 `npm run build`。

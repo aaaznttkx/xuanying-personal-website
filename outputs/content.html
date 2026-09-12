@@ -69,14 +69,10 @@
     .article-markdown a:not(.article-markdown-image) { color: var(--green-deep); text-decoration: underline; text-decoration-color: var(--green-pale); text-underline-offset: 3px; }
     .article-markdown-image { display: block; width: 100%; margin: 24px 0; line-height: 0; }
     .article-markdown-image img { display: block; width: 100%; max-width: 100%; height: auto; }
-    .source-link { display: inline-flex; margin-top: 18px; color: var(--green-deep); font-size: 12px; font-weight: 800; }
-    .source-link:hover { color: var(--green); }
-    .source-button { align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border: 1px solid var(--green-deep); border-radius: 2px; }
-    .source-button:hover, .source-button:focus-visible { color: var(--paper); background: var(--green-deep); }
+    .source-link { display: none; }
 
     .article-body { padding: 56px 0 108px; }
-    .article-source { padding-top: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
-    .article-source p { margin: 0; }
+
     .not-found { padding: 100px 0; text-align: center; }
     .not-found h1 { margin: 0 0 17px; font-family: var(--serif); font-size: 48px; font-weight: 400; }
     .not-found p { color: var(--muted); }
@@ -137,16 +133,6 @@
       return /^(?:https?:\/\/|public\/|\/)/i.test(url) ? url : '';
     }
 
-    function safeExternalUrl(value) {
-      const raw = String(value ?? '').trim();
-      if (!/^https?:\/\//i.test(raw)) return '';
-      try {
-        const url = new URL(raw);
-        return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
-      } catch {
-        return '';
-      }
-    }
 
     function renderInline(value) {
       let result = escapeHtml(value);
@@ -228,13 +214,6 @@
       const isArticle = item.type === 'article';
       backLink.href = isArticle ? 'articles.html' : 'notes.html';
       backLink.textContent = isArticle ? '← 返回文章列表' : '← 返回手记列表';
-      const sourceUrl = isArticle ? safeExternalUrl(item.sourceUrl) : '';
-      const source = sourceUrl ? `<a class="source-link source-button" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">查看公众号原文 ↗</a>` : '';
-      const sourceFooter = isArticle
-        ? sourceUrl
-          ? `<p>本文整理自微信公众号「玄英札记」。<br>如需查看完整原文，请访问<a class="source-link" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">微信公众号原文 ↗</a>。</p>`
-          : '<p>本文整理自微信公众号「玄英札记」。</p>'
-        : '';
       const articleContent = item.bodyMarkdown ? `<div class="article-markdown">${renderMarkdown(item.bodyMarkdown, item)}</div>` : renderGallery(item);
       document.title = `${item.title}｜玄英`;
       root.innerHTML = `
@@ -245,12 +224,10 @@
             <div class="article-meta"><span>${escapeHtml(item.date || '—')}</span><span>${escapeHtml(item.category)}</span></div>
             <p class="article-tags">${item.tags.map((tag) => escapeHtml(tag)).join(' / ')}</p>
             <p class="article-lede">${escapeHtml(item.summary)}</p>
-            ${source}
           </div>
         </header>
         <article class="article-body">
           ${articleContent}
-          ${sourceFooter ? `<div class="article-source">${sourceFooter}</div>` : ''}
         </article>
       `;
     }

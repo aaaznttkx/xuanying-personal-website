@@ -140,7 +140,7 @@ const localBody = markdownBody.replace(/__LOCAL_IMAGE_(\d+)__/g, (_, number) => 
   return `../images/articles/${options.slug}/${String(imageNumber).padStart(2, '0')}.${imageExtensions[imageNumber - 1] || 'jpg'}`;
 });
 const tags = (options.tags || '').split(',').map((tag) => tag.trim()).filter(Boolean);
-const article = `---\ntype: article\ntitle: ${yamlString(title)}\nslug: ${yamlString(options.slug)}\ndate: ${yamlString(options.date || '')}\nsummary: ${yamlString(summary)}\ncategory: ${yamlString(options.category || '')}\ntags: ${JSON.stringify(tags)}\ncover: ""\nsourceUrl: ${yamlString(options.url)}\nstatus: ${yamlString(options.status || 'draft')}\n---\n\n${localBody}\n`;
+const article = `---\ntype: article\ntitle: ${yamlString(title)}\nslug: ${yamlString(options.slug)}\ndate: ${yamlString(options.date || '')}\nsummary: ${yamlString(summary)}\ncategory: ${yamlString(options.category || '')}\ntags: ${JSON.stringify(tags)}\ncover: ""\nstatus: ${yamlString(options.status || 'draft')}\n---\n\n${localBody}\n`;
 await mkdir(path.join(contentRoot, 'articles'), { recursive: true });
 await writeFile(path.join(contentRoot, 'articles', `${options.slug}.md`), article, 'utf8');
 console.log(`Imported ${options.slug}: ${imageUrls.length} image(s). Run npm run build to publish it to outputs/.`);

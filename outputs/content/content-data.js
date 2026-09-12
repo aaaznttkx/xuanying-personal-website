@@ -1,28 +1,8 @@
 window.siteContent = [
   {
-    "type": "note",
-    "slug": "two-months-later-understand",
-    "title": "原来有些话，要过两个月才听懂",
-    "date": "2026-08-26",
-    "category": "成长记录",
-    "series": "",
-    "seriesOrder": null,
-    "tags": [
-      "AI",
-      "自我探索",
-      "人与人的连接"
-    ],
-    "summary": "两个月前没听懂的建议，在重新探索自己、与人交流之后，慢慢变成了正在经历的事情。",
-    "cover": "",
-    "sourceUrl": "",
-    "status": "published",
-    "bodyMarkdown": "两个月前，我正在填报高考志愿。\r\n\r\n那时候我加入了一个本地的 AI 交流群，想在群里问问哥哥姐姐，应该怎样利用 AI 帮助自己填志愿。我当时其实很迷茫，不只是纠结学校和专业，也不太清楚自己真正感兴趣的是什么，更不知道应该怎样判断一个方向适不适合自己。\r\n\r\n后来，有两位哥哥姐姐很认真地给了我一些建议。\r\n\r\n他们没有直接告诉我应该选择哪所学校、哪个专业，而是建议我去了解 GitHub 上一些帮助发现个人优势的 skill，结合自己的兴趣，用 AI 去探索自身优势和人生方向，再把这些思考放回到专业选择里。\r\n\r\n他们还提到了第一性原理、正交这些概念。\r\n\r\n但那时候的我，其实并没有真正听懂，没有真真正正地去使用 AI，只是把 AI 当成搜索引擎来使用。\r\n\r\n我大概记住了这些词，也觉得他们的思考方式很特别，但还不能理解这些概念和高考志愿填报之间到底有什么关系。那时候我只是想尽快做出一个选择，并没有意识到，填报志愿也可以被当成一个需要认真分析、不断了解自己、再逐步验证的事情。\r\n\r\n没想到，两个月以后，我正在做的事情，竟然和他们当时提到的方向慢慢联系起来了。\r\n\r\n我开始利用 AI 探索自己的优势，也和这两位哥哥姐姐一起去金城吃椰子鸡，交流最近的学习和生活。后来我重新翻回当时的群聊记录，才发现有些话并不是当时没有意义，只是那时候的我还没有经历到能够理解它们的阶段。\r\n\r\n第一性原理和正交这些概念，我现在也不能说自己已经真正理解了。但至少，我开始明白，他们当时并不是想替我做一个决定，而是在提醒我：在选择专业之前，也许可以先认真理解自己，再去看外部的信息和机会。\r\n\r\n有些建议当下听起来很遥远，过一段时间之后，却可能变成自己正在经历的事情。\r\n\r\n我也没有想到，最开始在群里向陌生人请教志愿填报，后来会发展成一次线下见面，以及一段持续的交流，两段友谊。\r\n\r\n这大概也是我最近对人与人之间连接的一点新感受：\r\n\r\n有时候，一句话的意义并不会立刻出现。它可能会先留在那里，等到我们走了一段路以后，再回头看，才突然发现自己已经开始理解了。",
-    "gallery": []
-  },
-  {
     "type": "article",
     "slug": "before-shanghai-imagination",
-    "title": "落笔写下上海旅游景点时，我释怀没选西大了",
+    "title": "落笔写下上海旅游景点时，我释怀没选四大了",
     "date": "2026-08-14",
     "category": "去上海之前",
     "series": "去上海之前",
@@ -34,9 +14,8 @@ window.siteContent = [
     ],
     "summary": "从一本旧版上海旅行书开始，我重新想象这座城市，也逐渐理解自己为什么愿意去上海读大学。",
     "cover": "",
-    "sourceUrl": "https://mp.weixin.qq.com/s/7S1pFWONG0wQL1LTOAkqBg",
     "status": "published",
-    "bodyMarkdown": "![公众号贴图 01](public/images/articles/imagine-shanghai/01.jpg)\r\n![公众号贴图 02](public/images/articles/imagine-shanghai/02.jpg)\r\n![公众号贴图 03](public/images/articles/imagine-shanghai/03.jpg)\r\n![公众号贴图 04](public/images/articles/imagine-shanghai/04.jpg)\r\n![公众号贴图 05](public/images/articles/imagine-shanghai/05.jpg)\r\n![公众号贴图 06](public/images/articles/imagine-shanghai/06.jpg)",
+    "bodyMarkdown": "![公众号贴图 01](public/images/articles/imagine-shanghai/01.jpg)\r\n\r\n脚步暂时到达不了的地方，书籍可以。\r\n\r\n这本《上海自助游》虽然是13年的书了，里面的带着我了解了上海的历史、气候、语言、民族构成等方面的知识。\r\n\r\n在落笔写下上海的许多景点时，上海的一角也被缓缓掀开，纠结省内211和上海双非的心也慢慢释怀。我知道留在桂A或许有211头衔，但去到上海会有很多的资源，那是地域的差异，会极大地拓展我的眼界，增长我的见识。\r\n\r\n除去这些游玩的景点，还有上海的医疗条件也是数一数二的，便利的交通条件，方便来往于江浙沪发达城市一带，今天早上跟一位阿姨交流了一下，她给我发了江浙一带的风景照片，我正好也可以在大学四年里往返于江浙沪之间感受江南水乡的温婉。\r\n\r\n上海家教的课时费也是比较高的，我看的最低课时费也有100元/小时，不过我是双非学校的话，可能竞争不过那些985、211的学生。不过没关系，顺其自然就好了。\r\n\r\n还有上海各种的漫展，演唱会，展览之类的公共资源也非常多，我期待在上海的熏陶、成长。\r\n\r\n课余时间，我也打算去做一些志愿服务活动，希望认识到更多的人和他们交谈来滋养我自己，增长我的见识。\r\n\r\n不过美中不足的是从我的家乡到上海要跨越1800公里的距离，坐火车要花一天的时间。在上海的广西各种各样的粉，比如说桂林米粉、牛腩粉、螺蛳粉、老友粉等等，在家乡随处可见，物价也比较便宜，但到上海吃一次可能会肉疼，hhhhhh……\r\n\r\n![公众号贴图 02](public/images/articles/imagine-shanghai/02.jpg)\r\n![公众号贴图 03](public/images/articles/imagine-shanghai/03.jpg)\r\n![公众号贴图 04](public/images/articles/imagine-shanghai/04.jpg)\r\n![公众号贴图 05](public/images/articles/imagine-shanghai/05.jpg)\r\n![公众号贴图 06](public/images/articles/imagine-shanghai/06.jpg)",
     "gallery": [
       "public/images/articles/imagine-shanghai/01.jpg",
       "public/images/articles/imagine-shanghai/02.jpg",
@@ -49,7 +28,7 @@ window.siteContent = [
   {
     "type": "article",
     "slug": "before-shanghai-choice",
-    "title": "26级回顾高考志愿填报，省内211 VS 上海双非",
+    "title": "26级回顾高考志愿填报，省内211VS上海双非",
     "date": "2026-08-07",
     "category": "去上海之前",
     "series": "去上海之前",
@@ -61,9 +40,8 @@ window.siteContent = [
     ],
     "summary": "回顾高考志愿填报时，我如何在留在省内和去上海读大学之间犹豫，并在有限的信息中做出一个阶段性的选择。",
     "cover": "",
-    "sourceUrl": "https://mp.weixin.qq.com/s/UOxVkAtjKygnVTaHaD3Frw",
     "status": "published",
-    "bodyMarkdown": "![公众号贴图 01](public/images/articles/choice-shanghai/01.jpg)\r\n![公众号贴图 02](public/images/articles/choice-shanghai/02.jpg)\r\n![公众号贴图 03](public/images/articles/choice-shanghai/03.jpg)\r\n![公众号贴图 04](public/images/articles/choice-shanghai/04.jpg)\r\n![公众号贴图 05](public/images/articles/choice-shanghai/05.jpg)\r\n![公众号贴图 06](public/images/articles/choice-shanghai/06.jpg)",
+    "bodyMarkdown": "![公众号贴图 01](public/images/articles/choice-shanghai/01.jpg)\r\n\r\n下午花两小时把《上海深度游》给翻完了。\r\n\r\n对上海的印象就是很繁华，高楼大厦，灯红酒绿，漫步在外滩上，观魔都夜景，感受着黄浦江上吹来的晚风，发丝随风飘起，偶尔遮挡住眼睛，只是一个人静静地走在沿岸。这个场景就很适配打雷姐的《young and beautiful》中的那句“hot summer nights and mid July”（仲夏夜茫，七月末央）她慵懒又富有磁性的声音，带着微醺感，更彰显大城市的纸醉金迷。不过这只是我的想象，也许当我下个月前往上海读书，这份想象会轻轻坠落，接着会被在上海的具体生活人事物所冲击、所裹挟，在八桂大地所孕育的灵魂中长出独属于上海带给我的那部分。\r\n\r\n好奇去搜了上海的25年GDP和人均GDP，分别为5.67万亿元和22.84万元/人，而玉林的则为2437.44亿元和4.21万元/人。数据差的太大了。在我18年的经历中，去过最繁华的城市也只是广西的首府南宁。\r\n\r\n其实在高考出分以及填报志愿时没有具体地想象过在上海读书的样子，在高二下册，也仅仅与朋友提及自己想去长三角和珠三角读大学，坚决不留在省内。\r\n\r\n6月25日早上，还没有出分数，我去爬龟山，穿了一件学校的社服，有位阿姨就认出我的学校，说她儿子是20级的，我们下山聊了一路，我跟她谈高考的估分以及志愿填报的迷茫，她推荐我报上海海事大学的某个专业（我不记得了）大四毕业有机会进到事业编，后面在小红书上有位分数相近的同学私信我说我可以冲一下我现在这个大学的这个专业，期间我妈也一直耳提面命地劝我填报上海应用技术大学的香料香精专业。于是乎，上海就在我心里悄悄中下了根。\r\n\r\n在上海读大学，有期待，有喜悦，但更多的是迷茫……我不知道放弃省内211跨越1800多公里去上海读一所双非的选择是否正确，\r\n\r\n那是我在信息有限的情况下彼时彼刻做出的选择，但正如蔡磊所言“只要不放弃，四面八方都是前方”。\r\n\r\n![公众号贴图 02](public/images/articles/choice-shanghai/02.jpg)\r\n![公众号贴图 03](public/images/articles/choice-shanghai/03.jpg)\r\n![公众号贴图 04](public/images/articles/choice-shanghai/04.jpg)\r\n![公众号贴图 05](public/images/articles/choice-shanghai/05.jpg)\r\n![公众号贴图 06](public/images/articles/choice-shanghai/06.jpg)",
     "gallery": [
       "public/images/articles/choice-shanghai/01.jpg",
       "public/images/articles/choice-shanghai/02.jpg",

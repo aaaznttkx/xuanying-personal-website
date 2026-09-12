@@ -152,18 +152,7 @@ async function checkPublishedContent(items, sourceItems, siteUrl) {
     const staticFile = path.join(outputRoot, directory, item.slug, 'index.html');
     if (!(await exists(staticFile))) fail(`${item.slug}: missing static page`);
     const page = await readFile(staticFile, 'utf8');
-    const sourceUrl = String(item.sourceUrl ?? '').trim();
-    if (sourceUrl) {
-      try {
-        const url = new URL(sourceUrl);
-        if (!['http:', 'https:'].includes(url.protocol)) throw new Error('invalid protocol');
-      } catch {
-        fail(`${item.slug}: sourceUrl is not a valid http or https URL`);
-      }
-      if (!page.includes(`href="${sourceUrl}"`) || !page.includes('target="_blank" rel="noopener noreferrer"')) fail(`${item.slug}: sourceUrl link is missing target or rel attributes`);
-    } else if (page.includes('source-button') || page.includes('微信公众号')) {
-      fail(`${item.slug}: empty sourceUrl still exposes a public source link`);
-    }
+    if (page.includes('source-button') || page.includes('查看公众号原文') || page.includes('微信公众号原文')) fail(`${item.slug}: public page still exposes an original-source link`);
     if (item.type === 'note' && (page.includes('本文整理自微信公众号') || page.includes('查看公众号原文') || page.includes('去上海之前'))) fail(`${item.slug}: note page contains article-only content`);
     if (!siteUrl && (page.includes('rel="canonical"') || page.includes('property="og:url"'))) fail(`${item.slug}: empty siteUrl generated canonical or og:url`);
     if (siteUrl) {
