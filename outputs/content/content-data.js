@@ -41,7 +41,7 @@ window.siteContent = [
   {
     "type": "article",
     "slug": "before-shanghai-imagination",
-    "title": "落笔写下上海旅游景点时，我释怀没选四大了",
+    "title": "落笔写下上海旅游景点时，我释怀没选西大了",
     "date": "2026-08-14",
     "category": "去上海之前",
     "series": "去上海之前",

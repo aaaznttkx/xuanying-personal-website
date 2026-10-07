@@ -1,6 +1,6 @@
 ---
 type: article
-title: "落笔写下上海旅游景点时，我释怀没选四大了"
+title: "落笔写下上海旅游景点时，我释怀没选西大了"
 slug: "before-shanghai-imagination"
 date: "2026-08-14"
 summary: "从一本旧版上海旅行书开始，我重新想象这座城市，也逐渐理解自己为什么愿意去上海读大学。"
